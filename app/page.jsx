@@ -2,7 +2,7 @@
 import Card from "@/components/Card";
 import Hero from "@/components/Hero";
 import { features } from "@/constants/constant";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = useState(new Set());
@@ -36,9 +36,12 @@ export default function Home() {
 
   return (
     <div>
-      <Hero />
+      {/* ✅ Wrap Hero in Suspense */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Hero />
+      </Suspense>
       <section
-        ref={featuresRef}
+        ref={featuresRef} 
         id="features"
         className={`py-20 sm:py-24 lg:py-28 transition-all duration-1000 ${
           visibleSections.has("features")
