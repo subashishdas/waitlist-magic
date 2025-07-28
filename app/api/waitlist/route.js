@@ -4,6 +4,7 @@ import { zodSchema } from "@/lib/zodSchema";
 import WaitlistUser from "@/model/WaitlistUser";
 import { confirmationEmail } from "@/utils/confirmationEmail";
 import { NextResponse } from "next/server";
+import z from "zod";
 
 export async function POST(req) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -13,7 +14,9 @@ export async function POST(req) {
 
     const payload = await req.json();
 
-    const validationSchema = zodSchema.pick({ email: true });
+    const validationSchema = zodSchema.pick({ email: true }).extend({
+      referredBy: z.string().optional(),
+    });
     const validatedData = validationSchema.safeParse(payload);
 
     if (!validatedData.success) {
@@ -75,6 +78,7 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       {
         message: "Internal Server Error",
