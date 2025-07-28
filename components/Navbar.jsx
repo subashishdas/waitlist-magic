@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className="sticky top-0 z-50 w-full bg-[#101A23]/80 text-white backdrop-blur-sm border-b border-[#223749]">
       <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
-        <div className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <svg
             className="h-8 w-8 text-blue-500"
             fill="none"
@@ -17,8 +17,8 @@ const Navbar = () => {
               fill="currentColor"
             ></path>
           </svg>
-          <h2 className="text-2xl font-bold">Innovate</h2>
-        </div>
+          <h2 className="text-2xl font-bold">InnovateAI</h2>
+        </Link>
         <nav className="hidden lg:flex items-center gap-8">
           <Link href="/" className="hover:text-blue-500 transition-colors">
             Home
