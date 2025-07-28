@@ -1,11 +1,12 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [referralCode, setReferralCode] = useState(null);
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     const refCode = searchParams.get("ref");
@@ -31,6 +32,7 @@ const Hero = () => {
       if (response.ok) {
         toast.success("Email added to waitlist");
         setEmail("");
+        router.push("/thank-you");
       } else {
         const errorData = await response.json();
         toast.error(errorData.message || response.statusText);
